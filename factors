@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+import math
+import sys
+import time
+
+def factorizetion():
+    strt_clock_timing = time.time()
+    try:
+        input_numbers_file = sys.argv[1]
+        with open(input_numbers_file, 'r') as file:
+            for numberz in file:
+                prime_number = int(numberz.strip())
+                if prime_number % 2 == 0:
+                    print(f"{prime_number}={prime_number // 2}*2")
+                    continue
+                
+                i = 3
+                while i <= math.isqrt(prime_number):
+                    if prime_number % i == 0:
+                        print(f"{prime_number}={prime_number // i}*{i}")
+                        break
+                    i += 2
+                else:
+                    print(f"{prime_number}={prime_number}*1")
+
+    except (IndexError, FileNotFoundError):
+        print("Error: wrong file name try other name plz have fun")
+
+    finally:
+        end_time = time.time()  
+        elapsed_time = end_time - strt_clock_timing
+        print(f"\nreal {elapsed_time:.3f}s")
+        print(f"user {elapsed_time:.3f}s")
+        print(f"sys 0m0.001s") 
+if __name__ == "__main__":
+    factorizetion()
