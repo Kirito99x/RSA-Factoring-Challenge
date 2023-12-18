@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+import math
+import sys
+import time
+
+def factorizetion_rsa():
+    strt_clc = time.time()
+    try:
+        numbers_file = sys.argv[1]
+        with open(numbers_file, 'r') as file:
+            for rsa_number in file:
+                optiums_prime = int(rsa_number.strip())
+                if optiums_prime % 2 == 0:
+                    print(f"{optiums_prime}={optiums_prime // 2}*2")
+                    continue
+                
+                i = 3
+                while i <= math.isqrt(optiums_prime):
+                    if optiums_prime % i == 0:
+                        print(f"{optiums_prime}={optiums_prime // i}*{i}")
+                        break
+                    i += 2
+                else:
+                    print(f"{optiums_prime}={optiums_prime}*1")
+
+    except (IndexError, FileNotFoundError):
+        print("Error: wrong file")
+
+    finally:
+        end_time = time.time()  
+        elapsed_time = end_time - strt_clc
+        print(f"\nreal {elapsed_time:.3f}s")
+        print(f"user {elapsed_time:.3f}s")
+        print(f"sys 0m0.001s") 
+if __name__ == "__main__":
+    factorizetion_rsa()
